@@ -1,4 +1,6 @@
 using EmployeeDirectory.DAL;
+using EmployeeDirectory.Services.Contracts;
+using EmployeeDirectory.Services.Providers;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<EmployeeContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("connectionString")));
+builder.Services.AddScoped<IEmployee, EmployeeService>();
+builder.Services.AddScoped<IDepartment,DepartmentService>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 

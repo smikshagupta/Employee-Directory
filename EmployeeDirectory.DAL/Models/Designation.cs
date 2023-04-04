@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeDirectory.DAL.Models
 {
-    public class Designaton : EntityMetaData
+    public class Designation : EntityMetaData
     {
         public int ID { get; set; }
         public string Name { get; set; }

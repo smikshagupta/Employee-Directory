@@ -11,7 +11,8 @@ namespace EmployeeDirectory.DAL.Models
     public class Employee:EntityMetaData
     {
         public int ID { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
@@ -30,7 +31,7 @@ namespace EmployeeDirectory.DAL.Models
         public string SkypeID { get; set; }
         public string Image { get; set; }
 
-        public Designaton Designaton { get; set; }
+        public Designation Designaton { get; set; }
         public Office  Office { get; set; }
         public Department Department { get; set; }
     }
