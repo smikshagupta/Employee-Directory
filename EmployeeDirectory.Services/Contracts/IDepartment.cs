@@ -11,9 +11,9 @@ namespace EmployeeDirectory.Services.Contracts
     {
         List<DepartmentConcern> GetDepartments();
 
-        bool AddDepartment(DepartmentConcern employee);
+        bool AddDepartment(DepartmentConcern department);
 
-        bool UpdateDepartment(int depID, DepartmentConcern employee);
+        bool UpdateDepartment(int depID, DepartmentConcern department);
         bool DeleteDepartment(int depID);
     }
 }

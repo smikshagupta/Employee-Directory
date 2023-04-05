@@ -14,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<EmployeeContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("connectionString")));
 builder.Services.AddScoped<IEmployee, EmployeeService>();
 builder.Services.AddScoped<IDepartment,DepartmentService>();
+builder.Services.AddScoped<ICategory, CategoryService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();

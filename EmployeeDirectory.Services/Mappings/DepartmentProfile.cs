@@ -13,7 +13,9 @@ namespace EmployeeDirectory.Services.Mappings
     {
         public DepartmentProfile()
         {
-            CreateMap<DepartmentConcern, Department>().ForMember(dest=>dest.CreatedDate,opt=>opt.MapFrom(s=>DateTime.Now))
+            CreateMap<DepartmentConcern, Department>()
+                .ForMember(dest=>dest.Name,opt=>opt.MapFrom(s=>s.Name))
+                .ForMember(dest=>dest.CreatedDate,opt=>opt.MapFrom(s=>DateTime.Now))
                 .ForMember(dest=>dest.LastModifiedDate,opt=>opt.MapFrom(s=>DateTime.Now));
             CreateMap<Department, DepartmentConcern>();
         }
