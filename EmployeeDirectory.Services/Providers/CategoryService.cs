@@ -27,8 +27,6 @@ namespace EmployeeDirectory.Services.Providers
         public List<T> GetDetails<T>()
         {
             var categoryType=typeof(T).Name;
-            Department d = new Department();
-            dynamic myType = Type.GetType(d);
 
             if (categoryType.Equals("OfficeConcern"))
             {
@@ -50,7 +48,7 @@ namespace EmployeeDirectory.Services.Providers
 
         public bool AddDetails<T>(T details)
         {
-            if(details != null)
+            if (details != null)
             {
                 var categoryType = typeof(T).Name;
                 if (categoryType.Equals("OfficeConcern"))
@@ -69,6 +67,7 @@ namespace EmployeeDirectory.Services.Providers
                 context.SaveChanges();
                 return true;
             }
+
             return false;
         }
 
@@ -113,16 +112,32 @@ namespace EmployeeDirectory.Services.Providers
             if (categoryType.Equals("OfficeConcern"))
             {
                 var details = context.Offices.Find(id);
-                context.Offices.Remove(details);
-                context.SaveChanges();
-                return true;
+                if (details != null)
+                {
+                    context.Offices.Remove(details);
+                    context.SaveChanges();
+                    return true;
+                }
             }
             else if (categoryType.Equals("DesignationConcern"))
             {
                 var details = context.Designations.Find(id);
-                context.Designations.Remove(details);
-                context.SaveChanges();
-                return true;
+                if(details != null)
+                {
+                    context.Designations.Remove(details);
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            else
+            {
+                var details = context.Departments.Find(id);
+                if(details != null)
+                {
+                    context.Departments.Remove(details);
+                    context.SaveChanges();
+                    return true;
+                }
             }
             
             return false;

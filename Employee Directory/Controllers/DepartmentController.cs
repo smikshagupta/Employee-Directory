@@ -9,22 +9,22 @@ namespace Employee_Directory.Controllers
     [ApiController]
     public class DepartmentController : ControllerBase
     {
-        private readonly IDepartment departmentService;
-        public DepartmentController(IDepartment department)
+        private readonly ICategory categoryService;
+        public DepartmentController(ICategory categoryService)
         {
-            departmentService = department;
+            this.categoryService = categoryService;
         }
 
         [HttpGet]
         public IActionResult GetDepartments()
         {
-            return Ok(departmentService.GetDepartments());
+            return Ok(categoryService.GetDetails<DepartmentConcern>());
         }
 
         [HttpPost]
         public  IActionResult AddDepartment(DepartmentConcern department)
         {
-            bool isAdded=departmentService.AddDepartment(department);
+            bool isAdded=categoryService.AddDetails<DepartmentConcern>(department);
             if(isAdded)
             {
                 return Ok("Department added successfully");
@@ -38,7 +38,7 @@ namespace Employee_Directory.Controllers
         [HttpPut]
         public IActionResult UpdateDepartment(int id,DepartmentConcern department)
         {
-            bool isUpdated=departmentService.UpdateDepartment(id, department);
+            bool isUpdated=categoryService.UpdateDetails<DepartmentConcern>(id, department);
             if(isUpdated)
             {
                 return Ok("Department details updated successfully");
@@ -52,7 +52,7 @@ namespace Employee_Directory.Controllers
         [HttpDelete]
         public IActionResult DeleteDepartment(int id)
         {
-            bool isDeleted=departmentService.DeleteDepartment(id);
+            bool isDeleted=categoryService.DeleteDetails<DepartmentConcern>(id);
             if (isDeleted)
             {
                 return Ok("Department deleted successfully");
