@@ -5,27 +5,34 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Employee_Directory.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/offices")]
     [ApiController]
     public class OfficeController : ControllerBase
     {
-        private readonly ICategory categoryService;
+        private readonly IOfficeContract officeContract;
 
-        public OfficeController(ICategory category) 
+        public OfficeController(IOfficeContract officeContract) 
         {
-            categoryService = category;
+            this.officeContract = officeContract;
         }
 
         [HttpGet]
         public IActionResult GetOffice()
         {
-            return Ok(categoryService.GetDetails<OfficeConcern>());
+            return Ok(officeContract.GetDetails<OfficeConcern>());
+        }
+
+        [HttpGet]
+        [Route("office")]
+        public IActionResult GetOfficeByID(int id)
+        {
+            return Ok(officeContract.GetDetailsByID<OfficeConcern>(id));
         }
 
         [HttpPost]
         public IActionResult AddOffice(OfficeConcern office)
         {
-            bool isAdded = categoryService.AddDetails<OfficeConcern>(office);
+            bool isAdded = officeContract.AddDetails<OfficeConcern>(office);
             if (isAdded)
             {
                 return Ok("Office added successfully");
@@ -36,7 +43,7 @@ namespace Employee_Directory.Controllers
         [HttpPut]
         public IActionResult UpdateOffice(int id, OfficeConcern designation)
         {
-            bool isUpdated = categoryService.UpdateDetails<OfficeConcern>(id, designation);
+            bool isUpdated = officeContract.UpdateDetails<OfficeConcern>(id, designation);
             if (isUpdated)
             {
                 return Ok("Office updated");
@@ -47,7 +54,7 @@ namespace Employee_Directory.Controllers
         [HttpDelete]
         public IActionResult DeleteOffice(int id)
         {
-            bool isDeleted = categoryService.DeleteDetails<OfficeConcern>(id);
+            bool isDeleted = officeContract.DeleteDetails<OfficeConcern>(id);
             if (isDeleted)
             {
                 return Ok("Office deleted");

@@ -6,27 +6,34 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Employee_Directory.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/titles")]
     [ApiController]
     public class DesignationController : ControllerBase
     {
-        private readonly ICategory categoryService;
+        private readonly IDesignationContract designationContract;
 
-        public DesignationController(ICategory category)
+        public DesignationController(IDesignationContract designationContract)
         {
-            categoryService = category;
+            this.designationContract = designationContract;
         }
 
         [HttpGet]
         public IActionResult GetDesignation()
         {
-            return Ok(categoryService.GetDetails<DesignationConcern>());
+            return Ok(designationContract.GetDetails<DesignationConcern>());
+        }
+
+        [HttpGet]
+        [Route("designation")]
+        public IActionResult GetDesignationByID(int id)
+        {
+            return Ok(designationContract.GetDetailsByID<DesignationConcern>(id));
         }
 
         [HttpPost]
         public IActionResult AddDesignation(DesignationConcern designation)
         {
-            bool isAdded=categoryService.AddDetails<DesignationConcern>(designation);
+            bool isAdded=designationContract.AddDetails<DesignationConcern>(designation);
             if(isAdded)
             {
                 return Ok("Designation added successfully");
@@ -37,7 +44,7 @@ namespace Employee_Directory.Controllers
         [HttpPut]
         public IActionResult UpdateDesignation(int id, DesignationConcern designation)
         {
-            bool isUpdated = categoryService.UpdateDetails<DesignationConcern>(id, designation);
+            bool isUpdated = designationContract.UpdateDetails<DesignationConcern>(id, designation);
             if (isUpdated)
             {
                 return Ok("Designation updated");
@@ -48,7 +55,7 @@ namespace Employee_Directory.Controllers
         [HttpDelete]
         public IActionResult DeleteDesignation(int id)
         {
-            bool isDeleted = categoryService.DeleteDetails<DesignationConcern>(id);
+            bool isDeleted = designationContract.DeleteDetails<DesignationConcern>(id);
             if (isDeleted)
             {
                 return Ok("Department deleted successfully");

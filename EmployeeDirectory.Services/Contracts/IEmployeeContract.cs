@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeDirectory.Services.Contracts
 {
-    public interface IEmployee
+    public interface IEmployeeContract
     {
         Task<List<EmployeeConcern>> GetEmployees();
             

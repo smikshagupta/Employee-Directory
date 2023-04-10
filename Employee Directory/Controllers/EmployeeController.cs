@@ -1,6 +1,7 @@
 ﻿using Concerns;
 using EmployeeDirectory.Services.Contracts;
 using EmployeeDirectory.Services.Providers;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,11 +9,12 @@ namespace Employee_Directory.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class EmployeeController : ControllerBase
     {
-        private readonly IEmployee employeeService;
+        private readonly IEmployeeContract employeeService;
 
-        public EmployeeController(IEmployee employeeService)
+        public EmployeeController(IEmployeeContract employeeService)
         {
             this.employeeService = employeeService;
         }

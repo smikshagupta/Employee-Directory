@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace EmployeeDirectory.Services.Contracts
 {
-    public  interface ICategory
+    public  interface ICategoryContract
     {
         List<T> GetDetails<T>();
-
+        T GetDetailsByID<T>(int id);
         bool AddDetails<T>(T details);
 
         bool UpdateDetails<T>(int id, T details);

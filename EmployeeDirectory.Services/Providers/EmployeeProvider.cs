@@ -7,11 +7,11 @@ using System.Linq;
 
 namespace EmployeeDirectory.Services.Providers
 {
-    public class EmployeeService:IEmployee
+    public class EmployeeProvider:IEmployeeContract
     {
         private EmployeeContext Context { get; set; }
         private readonly IMapper _mapper;
-        public EmployeeService(EmployeeContext context, IMapper mapper)
+        public EmployeeProvider(EmployeeContext context, IMapper mapper)
         {
             Context = context;
             _mapper = mapper;
