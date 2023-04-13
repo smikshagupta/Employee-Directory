@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeDirectory.DAL.Models
 {
-    public class Employee:EntityMetaData
+    public class Employee : EntityMetaData
     {
         public int ID { get; set; }
         public string FirstName { get; set; }
@@ -18,7 +18,7 @@ namespace EmployeeDirectory.DAL.Models
         public string Email { get; set; }
 
         [ForeignKey("Designation")]
-        public int DesignationID{ get; set; }
+        public int DesignationID { get; set; }
 
         [ForeignKey("Office")]
         public int OfficeID { get; set; }
@@ -30,9 +30,13 @@ namespace EmployeeDirectory.DAL.Models
 
         public string SkypeID { get; set; }
         public string Image { get; set; }
-
+        [ForeignKey("DesignationID")]
         public Designation Designaton { get; set; }
-        public Office  Office { get; set; }
+        [ForeignKey("OfficeID")]
+
+        public Office Office { get; set; }
+        [ForeignKey("DepartmentID")]
+
         public Department Department { get; set; }
     }
 }

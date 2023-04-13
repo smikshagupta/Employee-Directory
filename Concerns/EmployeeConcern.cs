@@ -9,18 +9,12 @@ namespace Concerns
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
-        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [ForeignKey("DesignationConcern")]
-        public int DesignationID { get; set; }
+        public DesignationConcern Designation { get; set; }
+        public DepartmentConcern Department { get; set; }
 
-        [ForeignKey("OfficeConcern")]
-        public int  OfficeID { get; set; }
-
-        [ForeignKey("DepartmentConcern")]
-        public int DepartmentID { get; set; }
-
+        public OfficeConcern Office { get; set; }
         public long PhoneNumber { get; set; }
 
         public string SkypeID { get; set; }

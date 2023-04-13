@@ -3,6 +3,7 @@ using Concerns;
 using EmployeeDirectory.DAL;
 using EmployeeDirectory.DAL.Models;
 using EmployeeDirectory.Services.Contracts;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace EmployeeDirectory.Services.Providers
@@ -19,7 +20,10 @@ namespace EmployeeDirectory.Services.Providers
 
         public async Task<List<EmployeeConcern>> GetEmployees()
         {
-            return _mapper.Map<List<EmployeeConcern>>(Context.Employees.ToList());
+            var result = Context.Employees.Include(e => e.Department).Include(e => e.Office).Include(e => e.Designaton);
+            return _mapper.Map<List<EmployeeConcern>>(result.ToList());
+                
+
         }
 
         public bool AddEmployee(EmployeeConcern employee)
