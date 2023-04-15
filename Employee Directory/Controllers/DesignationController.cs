@@ -1,12 +1,13 @@
 ﻿using Concerns;
 using EmployeeDirectory.Services.Contracts;
 using EmployeeDirectory.Services.Providers;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Employee_Directory.Controllers
 {
-    [Route("api/titles")]
+    [Route("api/designations")]
     [ApiController]
     public class DesignationController : ControllerBase
     {
@@ -36,7 +37,7 @@ namespace Employee_Directory.Controllers
             bool isAdded=designationContract.AddDetails<DesignationConcern>(designation);
             if(isAdded)
             {
-                return Ok("Designation added successfully");
+                return Ok();
             }
             return BadRequest();
         }
@@ -47,7 +48,7 @@ namespace Employee_Directory.Controllers
             bool isUpdated = designationContract.UpdateDetails<DesignationConcern>(id, designation);
             if (isUpdated)
             {
-                return Ok("Designation updated");
+                return Ok();
             }
             return NotFound();
         }
@@ -58,7 +59,7 @@ namespace Employee_Directory.Controllers
             bool isDeleted = designationContract.DeleteDetails<DesignationConcern>(id);
             if (isDeleted)
             {
-                return Ok("Department deleted successfully");
+                return Ok();
             }
             return NotFound("Department not found");
             

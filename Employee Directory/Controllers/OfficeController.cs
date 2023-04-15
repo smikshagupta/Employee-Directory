@@ -1,5 +1,6 @@
 ﻿using Concerns;
 using EmployeeDirectory.Services.Contracts;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,7 +36,7 @@ namespace Employee_Directory.Controllers
             bool isAdded = officeContract.AddDetails<OfficeConcern>(office);
             if (isAdded)
             {
-                return Ok("Office added successfully");
+                return Ok();
             }
             return BadRequest();
         }
@@ -46,7 +47,7 @@ namespace Employee_Directory.Controllers
             bool isUpdated = officeContract.UpdateDetails<OfficeConcern>(id, designation);
             if (isUpdated)
             {
-                return Ok("Office updated");
+                return Ok();
             }
             return NotFound();
         }
@@ -57,7 +58,7 @@ namespace Employee_Directory.Controllers
             bool isDeleted = officeContract.DeleteDetails<OfficeConcern>(id);
             if (isDeleted)
             {
-                return Ok("Office deleted");
+                return Ok();
             }
             return NotFound();
         }

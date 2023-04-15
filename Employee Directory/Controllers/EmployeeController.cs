@@ -9,7 +9,6 @@ namespace Employee_Directory.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeContract employeeService;
@@ -38,23 +37,23 @@ namespace Employee_Directory.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateEmployee( int empID,EmployeeConcern employee) 
+        public IActionResult UpdateEmployee( int id,EmployeeConcern employee) 
         { 
-            bool isUpdated=employeeService.UpdateEmployee(empID, employee);
+            bool isUpdated=employeeService.UpdateEmployee(id, employee);
             if( isUpdated )
             {
-                return Ok("Updated Employee details.");
+                return Ok();
             }
             return NotFound("Employee ID not found.");
         }
 
         [HttpDelete]
-        public IActionResult DeleteEmployee(int empID)
+        public IActionResult DeleteEmployee(int id)
         {
-            bool isDeleted=employeeService.DeleteEmployee(empID);
+            bool isDeleted=employeeService.DeleteEmployee(id);
             if( isDeleted )
             {
-                return Ok("Employee deleted successfully");
+                return Ok();
             }
             return NotFound("Employee ID not found.");
         }

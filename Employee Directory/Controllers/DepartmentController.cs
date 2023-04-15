@@ -1,5 +1,6 @@
 ﻿using Concerns;
 using EmployeeDirectory.Services.Contracts;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace Employee_Directory.Controllers
 {
     [Route("api/departments")]
     [ApiController]
+
     public class DepartmentController : ControllerBase
     {
         private readonly IDepartmentContract departmentContract;
@@ -33,7 +35,7 @@ namespace Employee_Directory.Controllers
             bool isAdded=departmentContract.AddDetails<DepartmentConcern>(department);
             if(isAdded)
             {
-                return Ok("Department added successfully");
+                return Ok();
             }
             else
             {
@@ -47,7 +49,7 @@ namespace Employee_Directory.Controllers
             bool isUpdated=departmentContract.UpdateDetails<DepartmentConcern>(id, department);
             if(isUpdated)
             {
-                return Ok("Department details updated successfully");
+                return Ok();
             }
             else
             {
@@ -61,7 +63,7 @@ namespace Employee_Directory.Controllers
             bool isDeleted=departmentContract.DeleteDetails<DepartmentConcern>(id);
             if (isDeleted)
             {
-                return Ok("Department deleted successfully");
+                return Ok();
             }
             else
             {
