@@ -9,11 +9,11 @@ namespace Employee_Directory.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeeController : ControllerBase
+    public class EmployeesController : ControllerBase
     {
         private readonly IEmployeeContract employeeService;
 
-        public EmployeeController(IEmployeeContract employeeService)
+        public EmployeesController(IEmployeeContract employeeService)
         {
             this.employeeService = employeeService;
         }

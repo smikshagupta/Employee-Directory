@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Employee_Directory.Controllers
 {
-    [Route("api/departments")]
+    [Route("api/[controller]")]
     [ApiController]
 
-    public class DepartmentController : ControllerBase
+    public class DepartmentsController : ControllerBase
     {
         private readonly IDepartmentContract departmentContract;
-        public DepartmentController(IDepartmentContract departmentContract)
+        public DepartmentsController(IDepartmentContract departmentContract)
         {
             this.departmentContract = departmentContract;
         }

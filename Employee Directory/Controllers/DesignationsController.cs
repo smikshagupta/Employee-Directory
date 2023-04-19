@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Employee_Directory.Controllers
 {
-    [Route("api/designations")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class DesignationController : ControllerBase
+    public class DesignationsController : ControllerBase
     {
         private readonly IDesignationContract designationContract;
 
-        public DesignationController(IDesignationContract designationContract)
+        public DesignationsController(IDesignationContract designationContract)
         {
             this.designationContract = designationContract;
         }

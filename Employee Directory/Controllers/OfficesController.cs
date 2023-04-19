@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Employee_Directory.Controllers
 {
-    [Route("api/offices")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class OfficeController : ControllerBase
+    public class OfficesController : ControllerBase
     {
         private readonly IOfficeContract officeContract;
 
-        public OfficeController(IOfficeContract officeContract) 
+        public OfficesController(IOfficeContract officeContract) 
         {
             this.officeContract = officeContract;
         }
