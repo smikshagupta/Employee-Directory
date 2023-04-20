@@ -1,5 +1,6 @@
 ﻿using Concerns;
 using EmployeeDirectory.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ namespace Employee_Directory.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
+    [Authorize]
     public class DepartmentsController : ControllerBase
     {
         private readonly IDepartmentContract departmentContract;

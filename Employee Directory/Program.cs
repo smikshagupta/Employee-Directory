@@ -1,7 +1,10 @@
 using EmployeeDirectory.DAL;
 using EmployeeDirectory.Services.Contracts;
 using EmployeeDirectory.Services.Providers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -14,6 +17,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<EmployeeContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("connectionString")));
 builder.Services.AddScoped<IEmployeeContract, EmployeeProvider>();
 builder.Services.AddScoped<IOfficeContract, OfficeProvider>();
+builder.Services.AddScoped<ITokenServicecs, TokenService>();
 builder.Services.AddScoped<IDepartmentContract, DepartmentProvider>();
 builder.Services.AddScoped<IDesignationContract, DesignationProvider>();
 builder.Services.AddCors(options =>
@@ -26,6 +30,18 @@ builder.Services.AddCors(options =>
 });
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
+    options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["TokenKey"])),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+        };
+    });
+builder.Services.AddAuthorization();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,7 +54,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors(MyAllowSpecificOrigins);
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

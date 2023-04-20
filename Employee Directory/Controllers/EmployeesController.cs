@@ -1,6 +1,7 @@
 ﻿using Concerns;
 using EmployeeDirectory.Services.Contracts;
 using EmployeeDirectory.Services.Providers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,8 @@ namespace Employee_Directory.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class EmployeesController : ControllerBase
     {
         private readonly IEmployeeContract employeeService;
@@ -23,7 +26,7 @@ namespace Employee_Directory.Controllers
         {
             return Ok(employeeService.GetEmployees());
         }
-
+        [Authorize]
         [HttpPost]
 
         public IActionResult AddEmployee(EmployeeConcern employee)

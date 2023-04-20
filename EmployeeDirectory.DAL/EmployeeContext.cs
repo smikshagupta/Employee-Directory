@@ -16,5 +16,6 @@ namespace EmployeeDirectory.DAL
         public DbSet<Department>Departments { get; set; }
         public DbSet<Designation> Designations { get; set; }
         public DbSet<Office> Offices { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Employee_Directory.Controllers
@@ -17,7 +18,7 @@ namespace Employee_Directory.Controllers
         {
             _logger = logger;
         }
-
+        [Authorize]
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
