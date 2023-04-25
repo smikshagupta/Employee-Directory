@@ -20,22 +20,39 @@ namespace EmployeeDirectory.Services.Providers
 
         public async Task<List<EmployeeConcern>> GetEmployees()
         {
-            var result = Context.Employees.Include(e => e.Department).Include(e => e.Office).Include(e => e.Designaton);
-            return _mapper.Map<List<EmployeeConcern>>(result.ToList());
+            List<Employee> employees=new List<Employee>();
+            try
+            {
+                var result = Context.Employees.Include(e => e.Department).Include(e => e.Office).Include(e => e.Designaton);
+                //var query= from emp in Context.Employees
+
+                //           select emp;
+               // var data=await result.ToListAsync();
+                
+                employees = result.ToList();
+
+            }
+            catch (Exception ex )
+            {
+
+                await Console.Out.WriteLineAsync(  ex.Message );
+            }
+            return _mapper.Map<List<EmployeeConcern>>(employees);
+
         }
 
-        public bool AddEmployee(EmployeeConcern employee)
+        public async Task<bool> AddEmployee(EmployeeConcern employee)
         {
             if(employee != null)
                 {
-                Context.Employees.Add(_mapper.Map<Employee>(employee));
+                await Context.Employees.AddAsync(_mapper.Map<Employee>(employee));
                 Context.SaveChanges();
                 return true;
             }
             return false;
         }
 
-        public bool UpdateEmployee(int empID, EmployeeConcern emp)
+        public async Task<bool> UpdateEmployee(int empID, EmployeeConcern emp)
         {
             Employee updatedEmployee=_mapper.Map<Employee>(emp);
             if(emp.ID == empID)
@@ -49,15 +66,15 @@ namespace EmployeeDirectory.Services.Providers
                 Context.Entry<Employee>(updatedEmployee).Property(emp => emp.PhoneNumber).IsModified = true;
                 Context.Entry<Employee>(updatedEmployee).Property(emp => emp.SkypeID).IsModified = true;
                 Context.Entry<Employee>(updatedEmployee).Property(emp => emp.Image).IsModified = true;
-                Context.SaveChanges();
+                await Context.SaveChangesAsync();
                 return true;
             }
             return false;
         }
 
-        public bool DeleteEmployee(int empID)
+        public async Task<bool> DeleteEmployee(int empID)
         {
-            var employee = Context.Employees.Find(empID);
+            var employee = await Context.Employees.FindAsync(empID);
             if (employee != null)
             {
                 Context.Employees.Remove(employee);

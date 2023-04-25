@@ -9,11 +9,11 @@ namespace EmployeeDirectory.Services.Contracts
 {
     public  interface ICategoryContract
     {
-        List<T> GetDetails<T>();
-        T GetDetailsByID<T>(int id);
-        bool AddDetails<T>(T details);
+        Task<List<T>> GetDetails<T>();
+        Task<T> GetDetailsByID<T>(int id);
+        Task<bool> AddDetails<T>(T details);
 
-        bool UpdateDetails<T>(int id, T details);
-        bool DeleteDetails<T>(int id);
+        Task<bool> UpdateDetails<T>(int id, T details);
+        Task<bool> DeleteDetails<T>(int id);
     }
 }

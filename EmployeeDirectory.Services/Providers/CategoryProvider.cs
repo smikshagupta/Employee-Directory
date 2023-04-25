@@ -26,22 +26,22 @@ namespace EmployeeDirectory.Services.Providers
         }
 
         
-        public List<TConcern> GetDetails<TConcern>()
+        public async Task<List<TConcern>> GetDetails<TConcern>()
         {
-            return  mapper.Map<List<TConcern>>(context.Set<TDataModel>());
+            return  mapper.Map<List<TConcern>>(await context.Set<TDataModel>().ToListAsync());
 
         }
 
-        public TConcern GetDetailsByID<TConcern>(int id)
+        public async Task<TConcern> GetDetailsByID<TConcern>(int id)
         {
-            return mapper.Map<TConcern>(context.Set<TDataModel>().Find(id));
+            return mapper.Map<TConcern>(await context.Set<TDataModel>().FindAsync(id));
         }
 
-        public bool AddDetails<TConcern>(TConcern details)
+        public async Task<bool> AddDetails<TConcern>(TConcern details)
         {
             if (details != null)
             {
-                context.Set<TDataModel>().Add(mapper.Map<TDataModel>(details));
+                await context.Set<TDataModel>().AddAsync(mapper.Map<TDataModel>(details));
                 context.SaveChanges();
                 return true;
             }
@@ -49,14 +49,13 @@ namespace EmployeeDirectory.Services.Providers
             return false;
         }
 
-        public bool UpdateDetails<TConcern>(int id, TConcern details)
+        public async Task<bool> UpdateDetails<TConcern>(int id, TConcern details)
         {
             TDataModel newDetails = mapper.Map<TDataModel>(details);
             if (id == (int)typeof(TDataModel).GetProperty("ID").GetValue(newDetails))
             {
-                //context.Entry<TDataModel>(newDetails).Property(n => n.Name).IsModified=true;
                 UpdateEntries(context, id, newDetails);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
                 return true;
             }
             return false;
@@ -64,13 +63,13 @@ namespace EmployeeDirectory.Services.Providers
 
         public abstract void UpdateEntries(EmployeeContext context, int id, TDataModel entity);
 
-        public bool DeleteDetails<TConcern>(int id)
+        public async Task<bool> DeleteDetails<TConcern>(int id)
         {
-            var details = context.Set<TDataModel>().Find(id);
+            var details = await context.Set<TDataModel>().FindAsync(id);
             if (details != null)
             {
                 context.Set<TDataModel>().Remove(details);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
                 return true;
             }
             return false;

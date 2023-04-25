@@ -19,21 +19,21 @@ namespace Employee_Directory.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetDepartments()
+        public async Task<ActionResult> GetDepartments()
         {
-            return Ok(departmentContract.GetDetails<DepartmentConcern>());
+            return Ok(await departmentContract.GetDetails<DepartmentConcern>());
         }
         [HttpGet]
         [Route("department")]
-        public IActionResult GetDepartmentByID(int id)
+        public async Task<ActionResult> GetDepartmentByID(int id)
         {
-            return Ok(departmentContract.GetDetailsByID<DepartmentConcern>(id));
+            return Ok(await departmentContract.GetDetailsByID<DepartmentConcern>(id));
         }
 
         [HttpPost]
-        public  IActionResult AddDepartment(DepartmentConcern department)
+        public  async Task<ActionResult> AddDepartment(DepartmentConcern department)
         {
-            bool isAdded=departmentContract.AddDetails<DepartmentConcern>(department);
+            bool isAdded=await departmentContract.AddDetails<DepartmentConcern>(department);
             if(isAdded)
             {
                 return Ok();
@@ -45,9 +45,9 @@ namespace Employee_Directory.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateDepartment(int id,DepartmentConcern department)
+        public async Task<ActionResult> UpdateDepartment(int id,DepartmentConcern department)
         {
-            bool isUpdated=departmentContract.UpdateDetails<DepartmentConcern>(id, department);
+            bool isUpdated=await departmentContract.UpdateDetails<DepartmentConcern>(id, department);
             if(isUpdated)
             {
                 return Ok();
@@ -59,9 +59,9 @@ namespace Employee_Directory.Controllers
         }
 
         [HttpDelete]
-        public IActionResult DeleteDepartment(int id)
+        public async Task<ActionResult> DeleteDepartment(int id)
         {
-            bool isDeleted=departmentContract.DeleteDetails<DepartmentConcern>(id);
+            bool isDeleted=await departmentContract.DeleteDetails<DepartmentConcern>(id);
             if (isDeleted)
             {
                 return Ok();

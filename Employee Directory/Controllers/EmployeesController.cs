@@ -29,9 +29,9 @@ namespace Employee_Directory.Controllers
         [Authorize]
         [HttpPost]
 
-        public IActionResult AddEmployee(EmployeeConcern employee)
+        public async Task<ActionResult> AddEmployee(EmployeeConcern employee)
         {
-            bool isAdded=employeeService.AddEmployee(employee);
+            bool isAdded=await employeeService.AddEmployee(employee);
             if(isAdded)
             {
                 return Ok();
@@ -40,9 +40,9 @@ namespace Employee_Directory.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateEmployee( int id,EmployeeConcern employee) 
+        public async Task<ActionResult> UpdateEmployee( int id,EmployeeConcern employee) 
         { 
-            bool isUpdated=employeeService.UpdateEmployee(id, employee);
+            bool isUpdated=await employeeService.UpdateEmployee(id, employee);
             if( isUpdated )
             {
                 return Ok();
@@ -51,9 +51,9 @@ namespace Employee_Directory.Controllers
         }
 
         [HttpDelete]
-        public IActionResult DeleteEmployee(int id)
+        public async Task<ActionResult> DeleteEmployee(int id)
         {
-            bool isDeleted=employeeService.DeleteEmployee(id);
+            bool isDeleted=await employeeService.DeleteEmployee(id);
             if( isDeleted )
             {
                 return Ok();

@@ -22,22 +22,22 @@ namespace Employee_Directory.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetDesignation()
+        public async Task<ActionResult> GetDesignation()
         {
-            return Ok(designationContract.GetDetails<DesignationConcern>());
+            return Ok(await designationContract.GetDetails<DesignationConcern>());
         }
 
         [HttpGet]
         [Route("designation")]
-        public IActionResult GetDesignationByID(int id)
+        public async Task<ActionResult> GetDesignationByID(int id)
         {
-            return Ok(designationContract.GetDetailsByID<DesignationConcern>(id));
+            return Ok(await designationContract.GetDetailsByID<DesignationConcern>(id));
         }
 
         [HttpPost]
-        public IActionResult AddDesignation(DesignationConcern designation)
+        public async Task<ActionResult> AddDesignation(DesignationConcern designation)
         {
-            bool isAdded=designationContract.AddDetails<DesignationConcern>(designation);
+            bool isAdded=await designationContract.AddDetails<DesignationConcern>(designation);
             if(isAdded)
             {
                 return Ok();
@@ -46,9 +46,9 @@ namespace Employee_Directory.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateDesignation(int id, DesignationConcern designation)
+        public async Task<ActionResult> UpdateDesignation(int id, DesignationConcern designation)
         {
-            bool isUpdated = designationContract.UpdateDetails<DesignationConcern>(id, designation);
+            bool isUpdated = await designationContract.UpdateDetails<DesignationConcern>(id, designation);
             if (isUpdated)
             {
                 return Ok();
@@ -57,9 +57,9 @@ namespace Employee_Directory.Controllers
         }
 
         [HttpDelete]
-        public IActionResult DeleteDesignation(int id)
+        public async Task<ActionResult> DeleteDesignation(int id)
         {
-            bool isDeleted = designationContract.DeleteDetails<DesignationConcern>(id);
+            bool isDeleted = await designationContract.DeleteDetails<DesignationConcern>(id);
             if (isDeleted)
             {
                 return Ok();

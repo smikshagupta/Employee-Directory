@@ -10,11 +10,11 @@ namespace EmployeeDirectory.Services.Contracts
     public interface IEmployeeContract
     {
         Task<List<EmployeeConcern>> GetEmployees();
-            
-        bool AddEmployee(EmployeeConcern employee);
 
-        bool UpdateEmployee(int empID,EmployeeConcern employee);
-        bool DeleteEmployee(int empID);
+        Task<bool> AddEmployee(EmployeeConcern employee);
+
+        Task<bool> UpdateEmployee(int empID,EmployeeConcern employee);
+        Task<bool> DeleteEmployee(int empID);
 
     }
 }

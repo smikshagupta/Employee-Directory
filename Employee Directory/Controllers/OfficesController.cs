@@ -21,22 +21,22 @@ namespace Employee_Directory.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetOffice()
+        public async Task<ActionResult> GetOffice()
         {
-            return Ok(officeContract.GetDetails<OfficeConcern>());
+            return Ok(await officeContract.GetDetails<OfficeConcern>());
         }
 
         [HttpGet]
         [Route("office")]
-        public IActionResult GetOfficeByID(int id)
+        public async Task<ActionResult> GetOfficeByID(int id)
         {
-            return Ok(officeContract.GetDetailsByID<OfficeConcern>(id));
+            return Ok(await officeContract.GetDetailsByID<OfficeConcern>(id));
         }
 
         [HttpPost]
-        public IActionResult AddOffice(OfficeConcern office)
+        public async Task<ActionResult> AddOffice(OfficeConcern office)
         {
-            bool isAdded = officeContract.AddDetails<OfficeConcern>(office);
+            bool isAdded = await officeContract.AddDetails<OfficeConcern>(office);
             if (isAdded)
             {
                 return Ok();
@@ -45,9 +45,9 @@ namespace Employee_Directory.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateOffice(int id, OfficeConcern designation)
+        public async Task<ActionResult> UpdateOffice(int id, OfficeConcern designation)
         {
-            bool isUpdated = officeContract.UpdateDetails<OfficeConcern>(id, designation);
+            bool isUpdated = await officeContract.UpdateDetails<OfficeConcern>(id, designation);
             if (isUpdated)
             {
                 return Ok();
@@ -56,9 +56,9 @@ namespace Employee_Directory.Controllers
         }
 
         [HttpDelete]
-        public IActionResult DeleteOffice(int id)
+        public async Task<ActionResult> DeleteOffice(int id)
         {
-            bool isDeleted = officeContract.DeleteDetails<OfficeConcern>(id);
+            bool isDeleted = await officeContract.DeleteDetails<OfficeConcern>(id);
             if (isDeleted)
             {
                 return Ok();
